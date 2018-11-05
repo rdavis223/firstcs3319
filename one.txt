@@ -1,0 +1,15 @@
+SHOW DATABASES;
+DROP DATABASE rdavis54assign2db;
+CREATE DATABASE rdavis54assign2db;
+USE rdavis54assign2db;
+GRANT USAGE ON *.* TO 'ta'@'localhost';
+DROP USER 'ta'@'localhost';
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
+FLUSH PRIVILEGES;
+SHOW tables;
+create TABLE product (productID CHAR(2)  NOT NULL PRIMARY KEY, description VARCHAR(20), cost DECIMAL(5,3), quantity INT);
+create TABLE agent (agentID CHAR(2)  NOT NULL PRIMARY KEY, firstName VARCHAR(30), lastName VARCHAR(30), city VARCHAR(15), commisionRate INT);
+create TABLE customer (customerID CHAR(2) NOT NULL, firstName VARCHAR(30), lastName  VARCHAR(30), city VARCHAR(15), phone CHAR(10), agentID CHAR(2), PRIMARY KEY (customerID), FOREIGN KEY (agentID) REFERENCES agent(agentID));
+create TABLE purchase (productID CHAR(2) NOT NULL, customerID CHAR(2) NOT NULL, quantity INT, PRIMARY KEY(productID,customerID), FOREIGN KEY (productID) REFERENCES product(productID), FOREIGN KEY (customerID) REFERENCES customer(customerID));
+SHOW TABLES;
